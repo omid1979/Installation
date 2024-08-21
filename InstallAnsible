@@ -1,0 +1,56 @@
+root@simorgh:~# apt -y install ansible-core 
+
+root@simorgh:~# LC_ALL=C.UTF-8 ansible --version
+ansible [core 2.14.3]
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  ansible collection location = /root/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/bin/ansible
+  python version = 3.11.2 (main, May  2 2024, 11:59:08) [GCC 12.2.0] (/usr/bin/python3)
+  jinja version = 3.1.2
+  libyaml = True
+
+root@simorgh:~# mkdir /etc/ansible
+root@simorgh:~# vi /etc/ansible/ansible.cfg 
+
+ # create new : set parameters if need (SSH host key checking)
+
+[defaults]
+host_key_checking=False
+root@simorgh:~# vi /etc/ansible/hosts
+# create new
+# set single target host
+192.168.50.48
+
+# set group targets as a group
+[WebServers]
+192.168.50.61
+192.168.50.62
+192.168.50.63
+
+To confirm settings:
+
+deb-srv1:~# ansible all --list-hosts
+  hosts (4):
+    192.168.50.48
+    192.168.50.61
+    192.168.50.62
+    192.168.50.63
+
+=============================== ON ERROR 
+deb-srv1:~# ansible --version
+ERROR: Ansible could not initialize the preferred locale: unsupported locale setting
+
+deb-srv1:~# LC_ALL=C.UTF-8 ansible --version
+ansible [core 2.14.3]
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  ansible collection location = /root/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/bin/ansible
+  python version = 3.11.2 (main, May  2 2024, 11:59:08) [GCC 12.2.0] (/usr/bin/python3)
+  jinja version = 3.1.2
+  libyaml = True
+
+
